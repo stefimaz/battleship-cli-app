@@ -148,12 +148,12 @@ function playGame(){
 
    while (remainingShips >0){
       const guess = rs.question('Enter your guess (eg.: A1, B2,...or type "Quit" to exit.):').toUpperCase();
-      if (guess === 'Quit'){
+      if (guess === 'QUIT'){
          console.log('Game Over: You quit the game')
          return;
       }
       const y = guess.charCodeAt(0) -65;
-      const x = parseInt(guess[1], 10);
+      const x = parseInt(guess.slice(1))-1;
 
       if (isNaN(x) || y < 0 || y >= board.length || x < 0 || x >= board.length) {
          console.log('Invalid input. Please try again.');
@@ -170,6 +170,3 @@ function playGame(){
 }
 //end game
 playGame();
-//🟠
-//🔵
-//❗
