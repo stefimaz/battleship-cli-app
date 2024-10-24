@@ -108,7 +108,7 @@ function renderBoard(board) {
 function makeGuess(board, x, y) {
    if (board[y][x] === '-') {
       console.log('Miss!');
-      board[y][x] = 'miss'; // Mark the miss
+      board[y][x] = 'miss'; // Mark the miss emoji
    } else if (board[y][x] === 'small') {
       console.log('Hit a small ship!');
       board[y][x] = 'orange'; // Mark the hit as an orange circle
@@ -144,12 +144,3 @@ function initGame() {
    return board;
 }
 
-// Sample game loop for making guesses (can be expanded later)
-function playGame() {
-   const board = initGame();
-   makeGuess(board, 2, 3); // Example guess
-   makeGuess(board, 0, 1); // Example guess
-   renderBoard(board); // Show the board after guesses
-}
-
-playGame();
