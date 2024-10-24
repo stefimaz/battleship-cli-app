@@ -63,34 +63,25 @@ function placeShip(board, shipLength, shipType){
 //Rendering the board
 //placing ship on the board 
 function renderBoard(board){
-   const boardSize = board.length;
-   let header = "  ";
-
-   for (let i =0; i < boardSize; i++){
-      header += i + " ";
-   }
-   console.log(header);
-   console.log("  +" + "- ".repeat(boardSize));
-
-   for (let y =0; y < boardSize; y++){
-      let row = String.fromCharCode(65 +y) + "|";
-      for (let x =0; x < boardSize; x++){
-         if (board[y][x] === '-') {
-            row += "- ";
-         } else if (board[y][x] === 'small'){
-            row += "S";
-         } else if (board[y][x] === 'large'){
-            row += "L";
-         } else if (board[y][x] === 'miss'){
-            row += "❗"
-         } else if (board[y][x] === 'orange'){
-            row += "🟠"
-         } else if (board[y][x] === 'blue'){
-            row += "🔵"
+   const displayBoard = board.map((row, index) => {
+      const rowObject = {};
+      row.forEach((cell, cellIndex) => {
+         if(cell === '-' || cell ==='small' || cell === 'large'){
+            rowObject[cellIndex +1] = '-';
+         }else if(cell === 'miss'){
+            rowObject[cellIndex +1] = '❗';
+         }else if(cell === 'orange'){
+            rowObject[cellIndex +1] = '🟠';
+         }else if(cell === 'blue'){
+            rowObject[cellIndex +1] = '🔵';
          }
-      }
-      console.log(row);
-   }
+      });
+      return { [String.fromCharCode(65 + index)]: rowObject };
+   });
+   const formattedBoard = displayBoard.reduce((acc, curr) => {
+      return {...acc, ...curr};
+   }, {});
+   console.table(formattedBoard);
 }
 //handling user guesses
 function makeGuess(board, x, y, remainingShips) {
